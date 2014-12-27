@@ -22,6 +22,13 @@ elixir.extend("compass", function(src, outputDir, options) {
         };
 
     options = _.extend(defaultOptions, options);
+
+    // Remap field names to something gulp-compass is expecting
+    options.require = options.modules;
+    delete options.modules;
+    options.javascript = options.js;
+    delete options.js;
+
     src = utilities.buildGulpSrc(src, options.sass, '**/*.scss');
 
     var onError = function(e) {
